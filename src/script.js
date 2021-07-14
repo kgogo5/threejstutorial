@@ -7,13 +7,13 @@ import { FlatShading } from "three";
 //loading
 const textureLoader = new THREE.TextureLoader();
 
-const normalTexture = textureLoader.load('/textures/height2.png');
+const normalTexture = textureLoader.load("/textures/height2.png");
 
 // Debug
 const gui = new dat.GUI();
 
 // Canvas
-const canvas = document.querySelector('canvas.webgl');
+const canvas = document.querySelector("canvas.webgl");
 
 // Scene
 const scene = new THREE.Scene();
@@ -24,10 +24,10 @@ const geometry = new THREE.SphereBufferGeometry(0.5, 64, 64);
 
 // Materials
 
-const material = new THREE.MeshStandardMaterial()
-material.color = new THREE.Color(0x292929)
-material.metalness = 0.7
-material.roughness = 0.2
+const material = new THREE.MeshStandardMaterial();
+material.color = new THREE.Color(0x292929);
+material.metalness = 0.7;
+material.roughness = 0.2;
 // material.flatShading = true;
 // material.vertexColors = true;
 // material.fog = true;
@@ -39,18 +39,18 @@ scene.add(sphere);
 
 // Lights
 
-const pointLight = new THREE.PointLight(0xffffff, 0.1)
+const pointLight = new THREE.PointLight(0xffffff, 0.1);
 pointLight.position.x = 2;
 pointLight.position.y = 3;
 pointLight.position.z = 4;
 scene.add(pointLight);
 
 // Lights2
-const pointLight2 = new THREE.PointLight(0x93361, 2)
-pointLight2.position.set(2.6, 2, -1.52)
-pointLight2.intensity = 10
+const pointLight2 = new THREE.PointLight(0x93361, 2);
+pointLight2.position.set(2.6, 2, -1.52);
+pointLight2.intensity = 10;
 
-scene.add(pointLight2)
+scene.add(pointLight2);
 
 // const light1 = gui.addFolder('Light 1')
 
@@ -72,11 +72,11 @@ scene.add(pointLight2)
 // scene.add(pointLightHelper)
 
 // Lights3
-const pointLight3 = new THREE.PointLight(0x593896, 2)
-pointLight3.position.set(-0.66, -0.56, 0.14)
-pointLight3.intensity = 10
+const pointLight3 = new THREE.PointLight(0x593896, 2);
+pointLight3.position.set(-0.66, -0.56, 0.14);
+pointLight3.intensity = 10;
 
-scene.add(pointLight3)
+scene.add(pointLight3);
 
 // const light2 = gui.addFolder('Light 2')
 
@@ -152,44 +152,44 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
  * Animate
  */
 
-document.addEventListener('mousemove', onDocumentMouseMove)
+document.addEventListener("mousemove", onDocumentMouseMove);
 
-let mouseX = 0
-let mouseY = 0
+let mouseX = 0;
+let mouseY = 0;
 
-let targetX = 0
-let targetY = 0
+let targetX = 0;
+let targetY = 0;
 
 const windowX = window.innerWidth / 2;
-const windowY = window.innerHeight /2;
+const windowY = window.innerHeight / 2;
 
 function onDocumentMouseMove(event) {
-  mouseX = (event.clientX - windowX)
-  mouseY = (event.clientY - windowY)
+  mouseX = event.clientX - windowX;
+  mouseY = event.clientY - windowY;
 }
 
 const updateSphere = (event) => {
-  sphere.position.y = window.scrollY * 0.001
-}
+  sphere.position.y = window.scrollY * 0.001;
+};
 
-window.addEventListener('scroll', updateSphere)
+window.addEventListener("scroll", updateSphere);
 
 const clock = new THREE.Clock();
 
 const tick = () => {
-  targetX = mouseX * 0.001
-  targetY = mouseY * 0.001
+  targetX = mouseX * 0.001;
+  targetY = mouseY * 0.001;
 
   const elapsedTime = clock.getElapsedTime();
 
   // Update objects
-  sphere.rotation.y = .5 * elapsedTime;
+  sphere.rotation.y = 0.5 * elapsedTime;
   // sphere.rotation.x = 0.2 * elapsedTime;
   // sphere.rotation.z = 0.4 * elapsedTime;
 
-  sphere.rotation.y += .5 * (targetX - sphere.rotation.y)
-  sphere.rotation.x += .05 * (targetY - sphere.rotation.x)
-  sphere.position.z += -.05 * (targetY - sphere.rotation.x)
+  sphere.rotation.y += 0.5 * (targetX - sphere.rotation.y);
+  sphere.rotation.x += 0.05 * (targetY - sphere.rotation.x);
+  sphere.position.z += -0.05 * (targetY - sphere.rotation.x);
 
   // Update Orbital Controls
   // controls.update()
