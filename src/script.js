@@ -20,7 +20,7 @@ const scene = new THREE.Scene();
 const geometry = new THREE.TorusGeometry(0.7, 0.2, 16, 100);
 
 const particlesGeometry = new THREE.BufferGeometry();
-const particlesCnt = 15000;
+const particlesCnt = 5000;
 
 const posArray = new Float32Array(particlesCnt * 3);
 
@@ -45,7 +45,7 @@ const particlesMaterial = new THREE.PointsMaterial({
   size: 0.005,
   map: cross,
   transparent: true,
-  color: "#ff7",
+  color: "#ffd",
   blending: THREE.AdditiveBlending,
 });
 
@@ -112,6 +112,21 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height);
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
+//배경색상 지정
+renderer.setClearColor(new THREE.Color("#21282a"), 1);
+
+// Mouse
+
+document.addEventListener("mousemove", animateParticles);
+
+let mouseX = 0;
+let mouseY = 0;
+
+function animateParticles(e) {
+  mouseY = e.clientY;
+  mouseX = e.clientX;
+}
+
 /**
  * Animate
  */
@@ -123,6 +138,14 @@ const tick = () => {
 
   // Update objects
   sphere.rotation.y = 0.5 * elapsedTime;
+
+  particlesMesh.rotation.x = 0.1 * elapsedTime;
+  particlesMesh.rotation.y = 0.1 * elapsedTime;
+
+  if (mouseX > 0) {
+    particlesMesh.rotation.x = mouseY * (elapsedTime * 0.00008);
+    particlesMesh.rotation.y = mouseX * (elapsedTime * 0.00008);
+  }
 
   // Update Orbital Controls
   // controls.update()
